@@ -64,4 +64,24 @@ describe InfluxDB::Rails do
       }.to raise_error(ArgumentError)
     end
   end
+
+  describe ".configure" do
+    context "udp settings" do
+      
+      before do
+        InfluxDB::Rails.configure do |config|
+          config.use_udp = true
+          config.udp_host = "some.host.com"
+          config.udp_port = 4545
+        end
+      end
+      
+      it "should return correct default settings" do
+        InfluxDB::Rails.configuration.use_udp.should == true
+        InfluxDB::Rails.configuration.udp_host.should == "some.host.com"
+        InfluxDB::Rails.configuration.udp_port.should == 4545
+      end
+    end
+  end
+
 end

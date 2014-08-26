@@ -29,7 +29,10 @@ module InfluxDB
           :hosts => configuration.influxdb_hosts,
           :port => configuration.influxdb_port,
           :async => configuration.async,
-          :use_ssl => configuration.use_ssl
+          :use_ssl => configuration.use_ssl,
+          :use_udp => configuration.use_udp,
+          :udp_host => configuration.udp_host,
+          :udp_port => configuration.udp_port
         InfluxDB::Logging.logger = configuration.logger unless configuration.logger.nil?
       end
 

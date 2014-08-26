@@ -8,7 +8,10 @@ module InfluxDB
       attr_accessor :influxdb_database
       attr_accessor :async
       attr_accessor :use_ssl
-
+      attr_accessor :use_udp
+      attr_accessor :udp_host
+      attr_accessor :udp_port
+      
       attr_accessor :series_name_for_controller_runtimes
       attr_accessor :series_name_for_view_runtimes
       attr_accessor :series_name_for_db_runtimes
@@ -45,6 +48,10 @@ module InfluxDB
         :influxdb_database => nil,
         :async => true,
         :use_ssl => false,
+        :use_udp => false,
+        
+        :udp_host => 'localhost',
+        :udp_port => 4444,
 
         :series_name_for_controller_runtimes => "rails.controller",
         :series_name_for_view_runtimes => "rails.view",
@@ -87,7 +94,10 @@ module InfluxDB
         @influxdb_database = DEFAULTS[:influxdb_database]
         @async = DEFAULTS[:async]
         @use_ssl = DEFAULTS[:use_ssl]
-
+        @use_udp = DEFAULTS[:use_udp]
+        @udp_host = DEFAULTS[:udp_host]
+        @udp_port = DEFAULTS[:udp_port]
+        
         @series_name_for_controller_runtimes = DEFAULTS[:series_name_for_controller_runtimes]
         @series_name_for_view_runtimes = DEFAULTS[:series_name_for_view_runtimes]
         @series_name_for_db_runtimes = DEFAULTS[:series_name_for_db_runtimes]
@@ -139,9 +149,11 @@ module InfluxDB
       end
 
       private
+      
       def initialize_http_connection
         Net::HTTP.new(@app_host, "80")
       end
+      
     end
   end
 end

@@ -26,4 +26,15 @@ describe InfluxDB::Rails::Configuration do
       @configuration.ignore_user_agent?("Googlebot/2.1").should be_falsey
     end
   end
+  
+  describe ".new" do
+    context "udp settings" do
+      it "should return correct default settings" do
+        @configuration.use_udp.should == false
+        @configuration.udp_host.should == 'localhost'
+        @configuration.udp_port.should == 4444
+      end
+    end
+  end
+  
 end
